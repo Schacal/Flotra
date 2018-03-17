@@ -1,0 +1,16 @@
+@import "../valo/valo.scss";
+
+@mixin myStyle {
+  @include valo;
+
+  .mystyle {
+    border: thin dashed;
+    background: darkkhaki;
+    color: darkred;
+  }
+
+  .mystyle:hover {
+    background-color: yellow;
+  }
+
+}
