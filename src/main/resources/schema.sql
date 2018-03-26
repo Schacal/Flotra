@@ -1,7 +1,9 @@
-create table student
+CREATE TABLE `USER`
 (
-   id integer not null,
-   name varchar(255) not null,
-   passport_number varchar(255) not null,
-   primary key(id)
+   `ID`        INT NOT NULL AUTO_INCREMENT ,
+   `USER_NAME` VARCHAR(100) NOT NULL ,
+   `PASSWORD`  VARCHAR(200) NOT NULL ,
+   `EMAIL`     VARCHAR(100) NOT NULL ,
+
+   PRIMARY KEY (`ID`)
 );

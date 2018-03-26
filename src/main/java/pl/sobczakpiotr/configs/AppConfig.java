@@ -1,4 +1,4 @@
-package pl.sobczakpiotr.request;
+package pl.sobczakpiotr.configs;
 
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;

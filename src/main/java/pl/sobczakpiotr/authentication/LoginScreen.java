@@ -18,6 +18,7 @@ import com.vaadin.server.Page;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
@@ -90,16 +91,19 @@ public class LoginScreen extends CssLayout {
 
     buttons.addComponent(login = new Button(bundle.getString(LOGIN_BUTTON_TEXT)));
     login.setDisableOnClick(true);
-    login.addClickListener((ClickListener) event -> {
-      try {
-        login();
-      } finally {
-        login.setEnabled(true);
+    login.addClickListener(new ClickListener() {
+      @Override
+      public void buttonClick(ClickEvent event) {
+        try {
+          LoginScreen.this.login();
+        } finally {
+          login.setEnabled(true);
+        }
       }
     });
     login.setClickShortcut(ShortcutAction.KeyCode.ENTER);
-    login.addStyleName("mystyle");
-//    login.addStyleName(ValoTheme.BUTTON_FRIENDLY);
+    //login.addStyleName("mystyle");
+    login.addStyleName(ValoTheme.BUTTON_FRIENDLY);
 
     buttons.addComponent(forgotPassword = new Button(bundle.getString(FORGOT_PASSWORD)));
     forgotPassword.addClickListener(
