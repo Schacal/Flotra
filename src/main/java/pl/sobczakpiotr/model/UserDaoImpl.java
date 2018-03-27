@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserDaoImpl {
 
-//  @Autowired
-//  private SessionFactory sessionFactory;
+  @Autowired
+  private SessionFactory sessionFactory;
 
 }
