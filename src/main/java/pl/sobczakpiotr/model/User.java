@@ -1,5 +1,6 @@
 package pl.sobczakpiotr.model;
 
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -65,5 +66,35 @@ public class User {
 
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    User user = (User) o;
+    return id == user.id &&
+        Objects.equals(userName, user.userName) &&
+        Objects.equals(password, user.password) &&
+        Objects.equals(email, user.email);
+  }
+
+  @Override
+  public int hashCode() {
+
+    return Objects.hash(id, userName, password, email);
+  }
+
+  @Override
+  public String toString() {
+    return "User{" +
+        "id=" + id +
+        ", userName='" + userName + '\'' +
+        ", email='" + email + '\'' +
+        '}';
   }
 }

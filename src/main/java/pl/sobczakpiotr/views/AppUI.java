@@ -10,11 +10,14 @@ import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.themes.ValoTheme;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import pl.sobczakpiotr.authentication.AccessControl;
 import pl.sobczakpiotr.authentication.BasicAccessControl;
 import pl.sobczakpiotr.authentication.LoginScreen;
 import pl.sobczakpiotr.authentication.LoginScreen.LoginListener;
 import pl.sobczakpiotr.lang.AppStringConstants;
+import pl.sobczakpiotr.model.UserDaoImpl;
 
 /**
  * @author Piotr Sobczak, created on 17-03-2018
@@ -25,6 +28,9 @@ import pl.sobczakpiotr.lang.AppStringConstants;
 public class AppUI extends UI {
 
   private AccessControl accessControl = new BasicAccessControl();
+
+  @Autowired
+  private UserDaoImpl userDao;
 
   @Override
   protected void init(VaadinRequest request) {
@@ -41,7 +47,8 @@ public class AppUI extends UI {
 
   protected void showMainView() {
     addStyleName(ValoTheme.UI_WITH_MENU);
-    setContent(new Label("<h1>Login Success!!</h1>", ContentMode.HTML));
+    List all = userDao.getAll();
+    setContent(new Label("<h1>Login Success!! List of all users : "+all.toString()+"</h1>", ContentMode.HTML));
     Navigator navigator = get().getNavigator();
     Navigator navigator1 = get().getNavigator();
     String state = navigator1.getState();
