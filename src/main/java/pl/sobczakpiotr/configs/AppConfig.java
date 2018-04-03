@@ -12,13 +12,14 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @author Piotr Sobczak, created on 19-03-2018
  */
 
 @Configuration
-//@EnableTransactionManagement
+@EnableTransactionManagement
 public class AppConfig {
 
   @Autowired

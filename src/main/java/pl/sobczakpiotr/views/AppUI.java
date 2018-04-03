@@ -47,7 +47,7 @@ public class AppUI extends UI {
 
   protected void showMainView() {
     addStyleName(ValoTheme.UI_WITH_MENU);
-    List all = userDao.getAll();
+    List all = userDao.getAllUsers();
     setContent(new Label("<h1>Login Success!! List of all users : "+all.toString()+"</h1>", ContentMode.HTML));
     Navigator navigator = get().getNavigator();
     Navigator navigator1 = get().getNavigator();
