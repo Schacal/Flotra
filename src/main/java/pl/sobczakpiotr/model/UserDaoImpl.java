@@ -1,10 +1,11 @@
 package pl.sobczakpiotr.model;
 
 import java.util.List;
+import java.util.Optional;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-
-
+import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class UserDaoImpl implements UserDao{
+public class UserDaoImpl implements UserDao {
 
   @PersistenceContext
   private EntityManager entityManager;
@@ -31,32 +32,30 @@ public class UserDaoImpl implements UserDao{
     }
   }
 
-  public void update(User user) {
-    entityManager.merge(user);
-  }
-
-  @Override
-  public User findByUserName(String userName) {
-    return null;
-  }
-
-  @Override
-  public User findByUserEmail(String email) {
-    return null;
-  }
-
   @Override
   public User findByUserID(int id) {
-    return entityManager.find( User.class, id );
+    return entityManager.find(User.class, id);
   }
 
   @Override
   public List<User> getAllUsers() {
-    return entityManager.createQuery("from User").getResultList();
+    Query from_user = entityManager.createQuery("from User");
+    return from_user.getResultList();
   }
 
   @Override
   public void updateUser(User user) {
+    entityManager.merge(user);
+  }
 
+  @Override
+  public Optional<User> findUserByName(String name) {
+    try {
+      User user = entityManager.createQuery("SELECT t FROM User t where t.userName = :value1", User.class)
+          .setParameter("value1", name).getSingleResult();
+      return Optional.of(user);
+    } catch (NoResultException e) {
+      return Optional.empty();
+    }
   }
 }

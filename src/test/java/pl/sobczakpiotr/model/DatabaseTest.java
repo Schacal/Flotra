@@ -1,54 +1,35 @@
 package pl.sobczakpiotr.model;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.SQLException;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import org.h2.tools.RunScript;
-import org.hibernate.Session;
-import org.hibernate.jdbc.Work;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import java.sql.Statement;
+import javax.sql.DataSource;
+import org.junit.After;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import pl.sobczakpiotr.configs.AppConfig;
 
 /**
  * @author Piotr Sobczak, created on 02-04-2018
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {AppConfig.class, UserDaoImpl.class})
+@TestPropertySource("classpath:application.properties")
 public class DatabaseTest {
 
-  protected static EntityManagerFactory entityManagerFactory;
-  protected static EntityManager entityManager;
+  @Autowired
+  protected UserDao userDao;
 
-  @BeforeClass
-  public static void init() {
-    entityManagerFactory = Persistence.createEntityManagerFactory("JunitTest");
-    entityManager = entityManagerFactory.createEntityManager();
-  }
+  @Autowired
+  private DataSource dataSource;
 
-  @Before
-  public void initializeDatabase() throws Exception {
-    Session session = entityManager.unwrap(Session.class);
-    session.doWork(new Work() {
-      @Override
-      public void execute(Connection connection) throws SQLException {
-        try {
-          File script = new File(getClass().getResource("/data.sql").getFile());
-          RunScript.execute(connection, new FileReader(script));
-        } catch (FileNotFoundException e) {
-          throw new RuntimeException("could not initialize with script");
-        }
-      }
-    });
-  }
-
-  @AfterClass
-  public static void tearDown() {
-    entityManager.clear();
-    entityManager.close();
-    entityManagerFactory.close();
+  @After
+  public void tearDown() throws SQLException {
+    Connection connection = dataSource.getConnection();
+    Statement statement = connection.createStatement();
+    statement.execute("DELETE FROM USER");
   }
 }
