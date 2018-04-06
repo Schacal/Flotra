@@ -43,7 +43,7 @@ public class AppUI extends UI {
 
   protected void showMainView() {
     addStyleName(ValoTheme.UI_WITH_MENU);
-//    userDao.createUser(new User(ThreadLocalRandom.current().nextInt(1, 10000), "asd", "Asd", "asdf"));
+//    userDao.createUser(new UserEntity(ThreadLocalRandom.current().nextInt(1, 10000), "asd", "Asd", "asdf"));
 //    List all = userDao.getAllUsers();
 //    setContent(new Label("<h1>Login Success!! List of all users : "+all.toString()+"</h1>", ContentMode.HTML));
     setContent(new Label("<h1>Login Sss : </h1>", ContentMode.HTML));

@@ -9,16 +9,16 @@ import java.util.Optional;
 
 public interface UserDao {
 
-  User findByUserID(int id);
+  UserEntity findByUserID(int id);
 
   List getAllUsers();
 
-  void createUser(User user);
+  void createUser(UserEntity user);
 
-  void deleteUser(User user);
+  void deleteUser(UserEntity user);
 
-  void updateUser(User user);
+  void updateUser(UserEntity user);
 
-  Optional<User> findUserByName(String name);
+  Optional<UserEntity> findUserByName(String name);
 
 }

@@ -4,8 +4,8 @@ package pl.sobczakpiotr.authentication;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pl.sobczakpiotr.model.User;
 import pl.sobczakpiotr.model.UserDao;
+import pl.sobczakpiotr.model.UserEntity;
 
 @Component
 public class BasicAccessControl implements AccessControl {
@@ -15,7 +15,7 @@ public class BasicAccessControl implements AccessControl {
 
   @Override
   public boolean signIn(String username, String password) {
-    Optional<User> user = userDao.findUserByName(username);
+    Optional<UserEntity> user = userDao.findUserByName(username);
 
     if (user.isPresent() &&
         user.get().getUserName().equals(username) &&

@@ -20,11 +20,11 @@ public class UserDaoImpl implements UserDao {
   private EntityManager entityManager;
 
 
-  public void createUser(User user) {
+  public void createUser(UserEntity user) {
     entityManager.persist(user);
   }
 
-  public void deleteUser(User user) {
+  public void deleteUser(UserEntity user) {
     if (entityManager.contains(user)) {
       entityManager.remove(user);
     } else {
@@ -33,25 +33,26 @@ public class UserDaoImpl implements UserDao {
   }
 
   @Override
-  public User findByUserID(int id) {
-    return entityManager.find(User.class, id);
+  public UserEntity findByUserID(int id) {
+    return entityManager.find(UserEntity.class, id);
   }
 
   @Override
-  public List<User> getAllUsers() {
-    Query from_user = entityManager.createQuery("from User");
+  public List<UserEntity> getAllUsers() {
+    Query from_user = entityManager.createQuery("from UserEntity ");
     return from_user.getResultList();
   }
 
   @Override
-  public void updateUser(User user) {
+  public void updateUser(UserEntity user) {
     entityManager.merge(user);
   }
 
   @Override
-  public Optional<User> findUserByName(String name) {
+  public Optional<UserEntity> findUserByName(String name) {
     try {
-      User user = entityManager.createQuery("SELECT t FROM User t where t.userName = :value1", User.class)
+      UserEntity user = entityManager
+          .createQuery("SELECT t FROM UserEntity t where t.userName = :value1", UserEntity.class)
           .setParameter("value1", name).getSingleResult();
       return Optional.of(user);
     } catch (NoResultException e) {

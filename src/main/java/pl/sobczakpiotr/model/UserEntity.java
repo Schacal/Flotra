@@ -1,41 +1,30 @@
 package pl.sobczakpiotr.model;
 
+import java.util.Collection;
 import java.util.Objects;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- * @author Piotr Sobczak, created on 19-03-2018
+ * @author Piotr Sobczak, created on 06-04-2018
  */
 @Entity
-@Table(name = "\"USER\"")
-public class User {
+@Table(name = "\"USER\"", schema = "public")
+public class UserEntity {
+
+  private int id;
+  private String userName;
+  private String password;
+  private String email;
+  private Collection<CarEntity> carsById;
+
 
   @Id
-  @Column(name = "ID")
-  private int id;
-
-  @Column(name = "USER_NAME")
-  private String userName;
-
-  @Column(name = "PASSWORD")
-  private String password;
-
-  @Column(name = "EMAIL")
-  private String email;
-
-  public User() {
-  }
-
-  public User(int id, String userName, String password, String email) {
-    this.id = id;
-    this.userName = userName;
-    this.password = password;
-    this.email = email;
-  }
-
+  @Column(name = "id", nullable = false)
   public int getId() {
     return id;
   }
@@ -44,6 +33,8 @@ public class User {
     this.id = id;
   }
 
+  @Basic
+  @Column(name = "user_name", nullable = false, length = 255)
   public String getUserName() {
     return userName;
   }
@@ -52,6 +43,8 @@ public class User {
     this.userName = userName;
   }
 
+  @Basic
+  @Column(name = "password", nullable = false, length = 255)
   public String getPassword() {
     return password;
   }
@@ -60,6 +53,8 @@ public class User {
     this.password = password;
   }
 
+  @Basic
+  @Column(name = "email", nullable = true, length = 255)
   public String getEmail() {
     return email;
   }
@@ -76,11 +71,11 @@ public class User {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    User user = (User) o;
-    return id == user.id &&
-        Objects.equals(userName, user.userName) &&
-        Objects.equals(password, user.password) &&
-        Objects.equals(email, user.email);
+    UserEntity that = (UserEntity) o;
+    return id == that.id &&
+        Objects.equals(userName, that.userName) &&
+        Objects.equals(password, that.password) &&
+        Objects.equals(email, that.email);
   }
 
   @Override
@@ -89,12 +84,12 @@ public class User {
     return Objects.hash(id, userName, password, email);
   }
 
-  @Override
-  public String toString() {
-    return "User{" +
-        "id=" + id +
-        ", userName='" + userName + '\'' +
-        ", email='" + email + '\'' +
-        '}';
+  @OneToMany(mappedBy = "userByUserId")
+  public Collection<CarEntity> getCarsById() {
+    return carsById;
+  }
+
+  public void setCarsById(Collection<CarEntity> carsById) {
+    this.carsById = carsById;
   }
 }
