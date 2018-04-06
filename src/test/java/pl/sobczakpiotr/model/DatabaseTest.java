@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.sql.DataSource;
 import org.junit.After;
+import org.junit.Assert;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -17,7 +19,7 @@ import pl.sobczakpiotr.configs.AppConfig;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {AppConfig.class, UserDaoImpl.class})
-@TestPropertySource("classpath:application.properties")
+@TestPropertySource("classpath:test.properties")
 public class DatabaseTest {
 
   @Autowired
@@ -25,6 +27,11 @@ public class DatabaseTest {
 
   @Autowired
   private DataSource dataSource;
+
+  @Test
+  public void dataSourceShouldNotBeNull() {
+    Assert.assertNotNull(dataSource);
+  }
 
   @After
   public void tearDown() throws SQLException {

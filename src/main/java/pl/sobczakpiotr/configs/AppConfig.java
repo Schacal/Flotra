@@ -37,10 +37,10 @@ public class AppConfig {
   @Bean
   public DataSource dataSource() {
     DriverManagerDataSource dataSource = new DriverManagerDataSource();
-    dataSource.setDriverClassName(environment.getProperty("spring.datasource.driverClassName"));
+//    dataSource.setDriverClassName(environment.getProperty("spring.datasource.driverClassName"));
     dataSource.setUrl(environment.getProperty("spring.datasource.url"));
-    dataSource.setUsername(environment.getProperty("spring.datasource.user"));
-    dataSource.setPassword(environment.getProperty("jdbc.pass"));
+    dataSource.setUsername(environment.getProperty("spring.datasource.username"));
+    dataSource.setPassword(environment.getProperty("spring.datasource.password"));
 
     return dataSource;
   }

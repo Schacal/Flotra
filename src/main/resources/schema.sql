@@ -1,11 +1,16 @@
-DROP TABLE IF EXISTS `USER`;
+DROP TABLE IF EXISTS ASDFFF;
+DROP TABLE IF EXISTS "USER";
 
-CREATE TABLE `USER`
+CREATE TABLE ASDFFF (
+  ID INT PRIMARY KEY NOT NULL
+);
+
+create table if not exists "USER"
 (
-   `ID`        INT          NOT NULL AUTO_INCREMENT,
-   `USER_NAME` VARCHAR(100) NOT NULL ,
-   `PASSWORD`  VARCHAR(200) NOT NULL ,
-   `EMAIL`     VARCHAR(100) NOT NULL ,
-
-   PRIMARY KEY (`ID`)
+  id serial              not null
+    constraint "USER_pkey"
+    primary key,
+  user_name varchar(100) not null,
+  password  varchar(200) not null,
+  email     varchar(100) not null
 );
