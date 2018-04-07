@@ -4,8 +4,8 @@ package pl.sobczakpiotr.authentication;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pl.sobczakpiotr.model.UserDao;
-import pl.sobczakpiotr.model.UserEntity;
+import pl.sobczakpiotr.model.user.UserDao;
+import pl.sobczakpiotr.model.user.UserEntity;
 
 @Component
 public class BasicAccessControl implements AccessControl {

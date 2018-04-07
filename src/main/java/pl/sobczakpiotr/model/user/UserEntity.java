@@ -1,4 +1,4 @@
-package pl.sobczakpiotr.model;
+package pl.sobczakpiotr.model.user;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import pl.sobczakpiotr.model.car.CarEntity;
 
 /**
  * @author Piotr Sobczak, created on 06-04-2018

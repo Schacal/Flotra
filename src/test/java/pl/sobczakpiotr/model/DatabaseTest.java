@@ -13,6 +13,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pl.sobczakpiotr.configs.AppConfig;
+import pl.sobczakpiotr.model.user.UserDao;
+import pl.sobczakpiotr.model.user.UserDaoImpl;
 
 /**
  * @author Piotr Sobczak, created on 02-04-2018

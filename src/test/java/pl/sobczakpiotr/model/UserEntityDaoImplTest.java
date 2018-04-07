@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.dao.DataIntegrityViolationException;
+import pl.sobczakpiotr.model.user.UserEntity;
 
 /**
  * @author Piotr Sobczak, created on 02-04-2018

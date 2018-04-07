@@ -1,4 +1,4 @@
-package pl.sobczakpiotr.model;
+package pl.sobczakpiotr.model.user;
 
 import java.util.List;
 import java.util.Optional;
