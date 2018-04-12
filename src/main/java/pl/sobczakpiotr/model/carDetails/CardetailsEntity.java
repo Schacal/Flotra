@@ -1,4 +1,4 @@
-package pl.sobczakpiotr.model;
+package pl.sobczakpiotr.model.carDetails;
 
 import java.util.Objects;
 import javax.persistence.Basic;

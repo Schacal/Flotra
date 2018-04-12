@@ -46,6 +46,6 @@ public class DatabaseTest {
     Connection connection = dataSource.getConnection();
     Statement statement = connection.createStatement();
     statement.execute("DELETE FROM CAR");
-    statement.execute("DELETE FROM USER");
+    statement.execute("DELETE FROM \"user\"");
   }
 }

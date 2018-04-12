@@ -16,7 +16,7 @@ import pl.sobczakpiotr.model.car.CarEntity;
  * @author Piotr Sobczak, created on 06-04-2018
  */
 @Entity
-@Table(name = "\"USER\"", schema = "public")
+@Table(name = "\"user\"", schema = "public")
 public class UserEntity {
 
   private int id;

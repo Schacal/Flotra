@@ -1,23 +1,23 @@
-create table if not exists "USER"
+create table if not exists "user"
 (
   id serial              not null
-    constraint "USER_pkey"
+    constraint "user_pkey"
     primary key,
   user_name varchar(255) not null,
   password  varchar(255) not null,
   email     varchar(255)
 );
 
--- create unique index if not exists user_id_uindex
---   on "USER" (id)
+-- create unique index user_id_uindex
+--   on "user" (id)
 -- ;
 --
--- create unique index if not exists user_user_name_uindex
---   on "USER" (user_name)
+-- create unique index user_user_name_uindex
+--   on "user" (user_name)
 -- ;
 --
--- create unique index if not exists user_email_uindex
---   on "USER" (email)
+-- create unique index user_email_uindex
+--   on "user" (email)
 -- ;
 
 create table if not exists car
@@ -28,18 +28,18 @@ create table if not exists car
   license_plate_number           varchar(255),
   user_id                        integer not null
     constraint car_user_id_fk
-    references "USER",
+    references "user",
   vin_number                     bigint,
   insurance_start_date           date,
   insurance_end_date             date,
   technical_examination_end_date date
 );
 
--- create unique index if not exists car_car_id_uindex
+-- create unique index car_car_id_uindex
 --   on car (car_id)
 -- ;
 --
--- create unique index if not exists car_license_plate_number_uindex
+-- create unique index car_license_plate_number_uindex
 --   on car (license_plate_number)
 -- ;
 
@@ -62,11 +62,11 @@ create table if not exists cardetails
   equipment    varchar
 );
 
--- create unique index if not exists car_details_car_detail_id_uindex
+-- create unique index car_details_car_detail_id_uindex
 --   on cardetails (car_detail_id)
 -- ;
 --
--- create unique index if not exists car_details_car_id_uindex
+-- create unique index car_details_car_id_uindex
 --   on cardetails (car_id)
 -- ;
 
@@ -82,7 +82,7 @@ create table if not exists images
     references cardetails
 );
 
--- create unique index if not exists images_image_id_uindex
+-- create unique index images_image_id_uindex
 --   on images (image_id)
 -- ;
 
@@ -99,7 +99,7 @@ create table if not exists holder
     references car
 );
 
--- create unique index if not exists holder_pesel_number_uindex
+-- create unique index holder_pesel_number_uindex
 --   on holder (pesel_number)
 -- ;
 
@@ -115,7 +115,7 @@ create table if not exists repair
   description varchar
 );
 
--- create unique index if not exists repair_repair_id_uindex
+-- create unique index repair_repair_id_uindex
 --   on repair (repair_id)
 -- ;
 
@@ -128,12 +128,12 @@ create table if not exists company
   website     varchar,
   user_id     integer not null
     constraint company_user_id_fk
-    references "USER",
+    references "user",
   address     varchar,
   telephone   bigint
 );
 
--- create unique index if not exists company_company_id_uindex
+-- create unique index company_company_id_uindex
 --   on company (company_id)
 -- ;
 
@@ -152,7 +152,7 @@ create table if not exists road_accidents
   description varchar
 );
 
--- create unique index if not exists road_accidents_id_uindex
+-- create unique index road_accidents_id_uindex
 --   on road_accidents (id)
 -- ;
---
+
