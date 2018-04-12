@@ -19,21 +19,28 @@ public class CarDaoImpl implements CarDao {
 
   @Override
   public List<CarEntity> getAllCarsForUser(UserEntity userEntity) {
-    return null;
+    List<CarEntity> resultList = entityManager
+        .createQuery("SELECT t FROM CarEntity t where t.userByUserId.userName = :value1", CarEntity.class)
+        .setParameter("value1", userEntity.getUserName()).getResultList();
+    return resultList;
   }
 
   @Override
   public void createCar(CarEntity carEntity) {
-
+    entityManager.persist(carEntity);
   }
 
   @Override
   public void deleteCar(CarEntity carEntity) {
-
+    if (entityManager.contains(carEntity)) {
+      entityManager.remove(carEntity);
+    } else {
+      entityManager.remove(entityManager.merge(carEntity));
+    }
   }
 
   @Override
   public void updateCar(CarEntity carEntity) {
-
+    entityManager.merge(carEntity);
   }
 }

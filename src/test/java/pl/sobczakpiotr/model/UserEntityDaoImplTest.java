@@ -1,10 +1,14 @@
 package pl.sobczakpiotr.model;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.util.List;
 import java.util.Optional;
-import org.junit.Assert;
 import org.junit.Test;
-import org.springframework.dao.DataIntegrityViolationException;
 import pl.sobczakpiotr.model.user.UserEntity;
 
 /**
@@ -13,48 +17,61 @@ import pl.sobczakpiotr.model.user.UserEntity;
 
 public class UserEntityDaoImplTest extends DatabaseTest {
 
-  private final int USER_ID = 10001;
+  private final String userName = "userName";
 
   @Test
   public void shouldCreateAndReadNewUserInDatabase() {
-    UserEntity user = createTestUser();
+    UserEntity user = createTestUser(userName);
     userDao.createUser(user);
-    UserEntity actualUser = userDao.findByUserID(USER_ID);
-    Assert.assertEquals(USER_ID, actualUser.getId());
+    Optional<UserEntity> userOptional = userDao.findUserByName(userName);
+    assertTrue(userOptional.isPresent());
+    assertEquals(userName, userOptional.get().getUserName());
   }
 
   @Test
   public void userTableShouldBeEmptyOnInitialization() {
     List<UserEntity> allUsers = userDao.getAllUsers();
-    Assert.assertTrue(allUsers.isEmpty());
+    assertTrue(allUsers.isEmpty());
   }
 
   @Test
   public void userShouldBeUpdated() {
     String updatedUserName = "Updated UserEntity Name";
     String updatedUserEmail = "Updated UserEntity Email";
-    UserEntity user = createTestUser();
+    UserEntity user = createTestUser(userName);
     userDao.createUser(user);
-    UserEntity actualUser = userDao.findByUserID(USER_ID);
+    Optional<UserEntity> actualUser = userDao.findUserByName(userName);
 
-    actualUser.setUserName(updatedUserName);
-    actualUser.setEmail(updatedUserEmail);
-    userDao.updateUser(actualUser);
+    if (!actualUser.isPresent()) {
+      fail();
+    }
+    UserEntity userEntity = actualUser.get();
+    userEntity.setUserName(updatedUserName);
+    userEntity.setEmail(updatedUserEmail);
+    userDao.updateUser(userEntity);
+    System.out.println("SDFD " + userEntity);
 
-    UserEntity updatedUser = userDao.findByUserID(USER_ID);
-    Assert.assertEquals(USER_ID, updatedUser.getId());
-    Assert.assertEquals(updatedUserName, updatedUser.getUserName());
-    Assert.assertEquals(updatedUserEmail, updatedUser.getEmail());
+    Optional<UserEntity> updatedUser = userDao.findUserByName(updatedUserName);
+
+    if (!updatedUser.isPresent()) {
+      fail();
+    }
+    UserEntity actualUser2 = updatedUser.get();
+    assertEquals(updatedUserName, actualUser2.getUserName());
+    assertEquals(updatedUserEmail, actualUser2.getEmail());
   }
 
   @Test
   public void existingUserShouldBeDeleted() {
-    UserEntity user = createTestUser();
+    UserEntity user = createTestUser(userName);
     userDao.createUser(user);
-    UserEntity actualUser = userDao.findByUserID(USER_ID);
-    userDao.deleteUser(actualUser);
-
-    Assert.assertNull(userDao.findByUserID(USER_ID));
+    Optional<UserEntity> actualUser = userDao.findUserByName(userName);
+    if (!actualUser.isPresent()) {
+      fail();
+    }
+    userDao.deleteUser(actualUser.get());
+    Optional<UserEntity> userByName = userDao.findUserByName(userName);
+    assertFalse(userByName.isPresent());
   }
 
   @Test
@@ -67,16 +84,7 @@ public class UserEntityDaoImplTest extends DatabaseTest {
     userEntity.setEmail("email@test.pl");
     userDao.deleteUser(userEntity);
 
-    Assert.assertNull(userDao.findByUserID(userID));
-  }
-
-  @Test(expected = DataIntegrityViolationException.class)
-  public void shouldThrowExceptionIfManyUsersWithTheSameIdAreAddedToDB() {
-    UserEntity user = createTestUser();
-    userDao.createUser(user);
-    userDao.createUser(user);
-
-    Assert.fail();
+    assertNull(userDao.findByUserID(userID));
   }
 
   @Test
@@ -85,7 +93,6 @@ public class UserEntityDaoImplTest extends DatabaseTest {
     String expectedUserEmail = "USER name";
     String expectedPassword = "password";
     UserEntity user = new UserEntity();
-    user.setId(USER_ID);
     user.setEmail(expectedUserEmail);
     user.setUserName(expectedUserName);
     user.setPassword(expectedPassword);
@@ -94,11 +101,10 @@ public class UserEntityDaoImplTest extends DatabaseTest {
     Optional<UserEntity> actualUser = userDao.findUserByName(expectedUserName);
     if (actualUser.isPresent()) {
       UserEntity user2 = actualUser.get();
-      Assert.assertEquals(USER_ID, user2.getId());
-      Assert.assertEquals(expectedUserName, user2.getUserName());
-      Assert.assertEquals(expectedUserEmail, user2.getEmail());
+      assertEquals(expectedUserName, user2.getUserName());
+      assertEquals(expectedUserEmail, user2.getEmail());
     } else {
-      Assert.fail();
+      fail();
     }
 
   }
@@ -109,13 +115,12 @@ public class UserEntityDaoImplTest extends DatabaseTest {
 
     Optional<UserEntity> actualUser = userDao.findUserByName(expectedUserName);
 
-    Assert.assertTrue(!actualUser.isPresent());
+    assertTrue(!actualUser.isPresent());
   }
 
-  private UserEntity createTestUser() {
+  private UserEntity createTestUser(String userName) {
     UserEntity userEntity = new UserEntity();
-    userEntity.setId(USER_ID);
-    userEntity.setUserName("TestUserName");
+    userEntity.setUserName(userName);
     userEntity.setPassword("TestPassword");
     userEntity.setEmail("email@test.pl");
     return userEntity;

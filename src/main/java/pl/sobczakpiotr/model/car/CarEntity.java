@@ -3,8 +3,12 @@ package pl.sobczakpiotr.model.car;
 import java.sql.Date;
 import java.util.Objects;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -28,6 +32,7 @@ public class CarEntity {
 
   @Id
   @Column(name = "car_id", nullable = false)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
   public int getCarId() {
     return carId;
   }
@@ -65,7 +70,8 @@ public class CarEntity {
     return Objects.hash(carId, licensePlateNumber);
   }
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+      CascadeType.REFRESH})
   @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
   public UserEntity getUserByUserId() {
     return userByUserId;
@@ -113,5 +119,18 @@ public class CarEntity {
 
   public void setTechnicalExaminationEndDate(Date technicalExaminationEndDate) {
     this.technicalExaminationEndDate = technicalExaminationEndDate;
+  }
+
+  @Override
+  public String toString() {
+    return "CarEntity{" +
+        "carId=" + carId +
+        ", licensePlateNumber='" + licensePlateNumber + '\'' +
+        ", userByUserId=" + userByUserId +
+        ", vinNumber=" + vinNumber +
+        ", insuranceStartDate=" + insuranceStartDate +
+        ", insuranceEndDate=" + insuranceEndDate +
+        ", technicalExaminationEndDate=" + technicalExaminationEndDate +
+        '}';
   }
 }
