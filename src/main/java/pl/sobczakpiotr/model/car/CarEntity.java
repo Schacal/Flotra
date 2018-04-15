@@ -12,7 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import pl.sobczakpiotr.model.carDetails.CardetailsEntity;
 import pl.sobczakpiotr.model.user.UserEntity;
 
 /**
@@ -29,10 +31,11 @@ public class CarEntity {
   private Date insuranceStartDate;
   private Date insuranceEndDate;
   private Date technicalExaminationEndDate;
+  private CardetailsEntity carDetailsEntity;
 
   @Id
   @Column(name = "car_id", nullable = false)
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   public int getCarId() {
     return carId;
   }
@@ -132,5 +135,14 @@ public class CarEntity {
         ", insuranceEndDate=" + insuranceEndDate +
         ", technicalExaminationEndDate=" + technicalExaminationEndDate +
         '}';
+  }
+
+  @OneToOne(fetch = FetchType.LAZY, mappedBy = "carByCarId", cascade = CascadeType.ALL)
+  public CardetailsEntity getCarDetailsEntity() {
+    return carDetailsEntity;
+  }
+
+  public void setCarDetailsEntity(CardetailsEntity carDetailsEntity) {
+    this.carDetailsEntity = carDetailsEntity;
   }
 }

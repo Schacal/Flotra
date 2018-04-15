@@ -4,9 +4,12 @@ import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import pl.sobczakpiotr.model.car.CarEntity;
 
@@ -14,7 +17,7 @@ import pl.sobczakpiotr.model.car.CarEntity;
  * @author Piotr Sobczak, created on 07-04-2018
  */
 @Entity
-@Table(name = "cardetails", schema = "public", catalog = "FlotraDatabase")
+@Table(name = "cardetails", schema = "public")
 public class CardetailsEntity {
 
   private int carDetailId;
@@ -31,6 +34,7 @@ public class CardetailsEntity {
 
   @Id
   @Column(name = "car_detail_id", nullable = false)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   public int getCarDetailId() {
     return carDetailId;
   }
@@ -157,7 +161,7 @@ public class CardetailsEntity {
         .hash(carDetailId, manufacturer, model, engine, color, fuelType, enginePower, doorsNumber, mileage, equipment);
   }
 
-  @ManyToOne
+  @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "car_id", referencedColumnName = "car_id", nullable = false)
   public CarEntity getCarByCarId() {
     return carByCarId;

@@ -49,7 +49,6 @@ public class UserEntityDaoImplTest extends DatabaseTest {
     userEntity.setUserName(updatedUserName);
     userEntity.setEmail(updatedUserEmail);
     userDao.updateUser(userEntity);
-    System.out.println("SDFD " + userEntity);
 
     Optional<UserEntity> updatedUser = userDao.findUserByName(updatedUserName);
 

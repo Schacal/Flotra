@@ -3,8 +3,11 @@ package pl.sobczakpiotr.model;
 import static org.junit.Assert.assertNotNull;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.sql.DataSource;
 import org.junit.After;
 import org.junit.Test;
@@ -34,7 +37,7 @@ public class DatabaseTest {
   protected CarDao carDao;
 
   @Autowired
-  private DataSource dataSource;
+  protected DataSource dataSource;
 
   @Test
   public void dataSourceShouldNotBeNull() {
@@ -45,7 +48,22 @@ public class DatabaseTest {
   public void tearDown() throws SQLException {
     Connection connection = dataSource.getConnection();
     Statement statement = connection.createStatement();
-    statement.execute("DELETE FROM CAR");
+    statement.execute("DELETE FROM cardetails");
+    statement.execute("DELETE FROM car");
     statement.execute("DELETE FROM \"user\"");
+  }
+
+  protected void printTables() {
+    try {
+      ResultSet resultSet = dataSource.getConnection().createStatement().executeQuery("SHOW TABLES");
+      List<String> tables = new ArrayList<>();
+      while (resultSet.next()) {
+        tables.add(resultSet.getString(1));
+      }
+      System.out.println("TABLES IN DB: " + tables);
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 }

@@ -59,6 +59,7 @@ public class AppConfig {
     additionalProperties.put("hibernate.dialect", environment.getProperty("hibernate.dialect"));
     additionalProperties.put("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
     additionalProperties.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
+//    additionalProperties.put("hibernate.id.new_generator_mappings","false");
     entityManagerFactory.setJpaProperties(additionalProperties);
     return entityManagerFactory;
   }
