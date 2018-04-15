@@ -1,4 +1,4 @@
-package pl.sobczakpiotr.model;
+package pl.sobczakpiotr.model.user;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -9,7 +9,7 @@ import static org.junit.Assert.fail;
 import java.util.List;
 import java.util.Optional;
 import org.junit.Test;
-import pl.sobczakpiotr.model.user.UserEntity;
+import pl.sobczakpiotr.model.DatabaseTest;
 
 /**
  * @author Piotr Sobczak, created on 02-04-2018

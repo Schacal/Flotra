@@ -3,14 +3,18 @@ package pl.sobczakpiotr.model.user;
 import java.util.Collection;
 import java.util.Objects;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import pl.sobczakpiotr.model.car.CarEntity;
+import pl.sobczakpiotr.model.company.CompanyEntity;
 
 /**
  * @author Piotr Sobczak, created on 06-04-2018
@@ -24,6 +28,7 @@ public class UserEntity {
   private String password;
   private String email;
   private Collection<CarEntity> carsById;
+  private CompanyEntity companyEntity;
 
 
   @Id
@@ -95,6 +100,15 @@ public class UserEntity {
 
   public void setCarsById(Collection<CarEntity> carsById) {
     this.carsById = carsById;
+  }
+
+  @OneToOne(fetch = FetchType.LAZY, mappedBy = "userEntity", cascade = CascadeType.ALL)
+  public CompanyEntity getCompanyEntity() {
+    return companyEntity;
+  }
+
+  public void setCompanyEntity(CompanyEntity companyEntity) {
+    this.companyEntity = companyEntity;
   }
 
   @Override

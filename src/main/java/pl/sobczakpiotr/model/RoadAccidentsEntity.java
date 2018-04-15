@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import pl.sobczakpiotr.model.car.CarEntity;
+import pl.sobczakpiotr.model.holder.HolderEntity;
 
 /**
  * @author Piotr Sobczak, created on 07-04-2018

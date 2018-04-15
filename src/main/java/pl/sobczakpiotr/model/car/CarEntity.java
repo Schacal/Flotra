@@ -1,6 +1,7 @@
 package pl.sobczakpiotr.model.car;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -12,9 +13,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import pl.sobczakpiotr.model.carDetails.CardetailsEntity;
+import pl.sobczakpiotr.model.holder.HolderEntity;
 import pl.sobczakpiotr.model.user.UserEntity;
 
 /**
@@ -32,6 +35,7 @@ public class CarEntity {
   private Date insuranceEndDate;
   private Date technicalExaminationEndDate;
   private CardetailsEntity carDetailsEntity;
+  private List<HolderEntity> holders;
 
   @Id
   @Column(name = "car_id", nullable = false)
@@ -144,5 +148,14 @@ public class CarEntity {
 
   public void setCarDetailsEntity(CardetailsEntity carDetailsEntity) {
     this.carDetailsEntity = carDetailsEntity;
+  }
+
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "carByCarId")
+  public List<HolderEntity> getHolders() {
+    return holders;
+  }
+
+  public void setHolders(List<HolderEntity> holders) {
+    this.holders = holders;
   }
 }

@@ -6,9 +6,9 @@ import static org.junit.Assert.assertTrue;
 
 import java.sql.Date;
 import java.util.List;
-import org.junit.Assert;
 import org.junit.Test;
 import pl.sobczakpiotr.model.DatabaseTest;
+import pl.sobczakpiotr.model.carDetails.CardetailsEntity;
 import pl.sobczakpiotr.model.user.UserEntity;
 
 /**
@@ -18,12 +18,13 @@ public class CarDaoImplTest extends DatabaseTest {
 
   private final String USER_NAME = "testUserName";
   private final String EMAIL = "email@test.com";
-  private final String UNIQUE_VALUE = String.valueOf(System.currentTimeMillis());
+  private final String CAR_COLOR = "BLACK";
 
   @Test
   public void shouldCreateCarEntity() {
     CarEntity carEntity = createCarEntity(UNIQUE_VALUE);
     UserEntity userEntity = createUserEntity(USER_NAME, UNIQUE_VALUE);
+
     carDao.createCar(carEntity);
     List<CarEntity> allCarsForUser = carDao.getAllCarsForUser(userEntity);
     assertFalse(allCarsForUser.isEmpty());
@@ -54,8 +55,22 @@ public class CarDaoImplTest extends DatabaseTest {
     assertFalse(allCarsForUser.isEmpty());
     assertEquals(1, allCarsForUser.size());
     CarEntity updatedCarEntity = allCarsForUser.iterator().next();
-    Assert.assertEquals(new Long(vinNumber), updatedCarEntity.getVinNumber());
+    assertEquals(new Long(vinNumber), updatedCarEntity.getVinNumber());
 
+  }
+
+  @Test
+  public void shouldCreateCarEntityDetails() {
+    CarEntity carEntity = createCarEntity(UNIQUE_VALUE);
+    UserEntity userEntity = createUserEntity(USER_NAME, UNIQUE_VALUE);
+    carEntity.setCarDetailsEntity(createCardetailsEntity(carEntity));
+
+    carDao.createCar(carEntity);
+    List<CarEntity> allCarsForUser = carDao.getAllCarsForUser(userEntity);
+    assertFalse(allCarsForUser.isEmpty());
+    assertEquals(1, allCarsForUser.size());
+    CarEntity carEntityFromDb = allCarsForUser.iterator().next();
+    assertEquals(CAR_COLOR, carEntityFromDb.getCarDetailsEntity().getColor());
   }
 
 
@@ -76,6 +91,17 @@ public class CarDaoImplTest extends DatabaseTest {
     userEntity.setUserName(userName);
     userEntity.setPassword("password" + unique);
     return userEntity;
+  }
+
+  private CardetailsEntity createCardetailsEntity(CarEntity carEntity) {
+    CardetailsEntity cardetailsEntity = new CardetailsEntity();
+    cardetailsEntity.setCarByCarId(carEntity);
+    cardetailsEntity.setColor(CAR_COLOR);
+    cardetailsEntity.setDoorsNumber(5);
+    cardetailsEntity.setEngine("Engine");
+    cardetailsEntity.setEquipment("Air condition");
+
+    return cardetailsEntity;
   }
 
 }

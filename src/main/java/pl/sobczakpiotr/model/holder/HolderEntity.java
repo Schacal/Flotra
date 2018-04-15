@@ -1,4 +1,4 @@
-package pl.sobczakpiotr.model;
+package pl.sobczakpiotr.model.holder;
 
 import java.util.Objects;
 import javax.persistence.Basic;

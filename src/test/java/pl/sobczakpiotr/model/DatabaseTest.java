@@ -38,6 +38,7 @@ public class DatabaseTest {
 
   @Autowired
   protected DataSource dataSource;
+  protected final String UNIQUE_VALUE = String.valueOf(System.currentTimeMillis());
 
   @Test
   public void dataSourceShouldNotBeNull() {
@@ -49,6 +50,7 @@ public class DatabaseTest {
     Connection connection = dataSource.getConnection();
     Statement statement = connection.createStatement();
     statement.execute("DELETE FROM cardetails");
+    statement.execute("DELETE FROM company");
     statement.execute("DELETE FROM car");
     statement.execute("DELETE FROM \"user\"");
   }
