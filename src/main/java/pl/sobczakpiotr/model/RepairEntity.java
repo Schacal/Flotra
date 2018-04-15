@@ -15,7 +15,7 @@ import pl.sobczakpiotr.model.car.CarEntity;
  * @author Piotr Sobczak, created on 07-04-2018
  */
 @Entity
-@Table(name = "repair", schema = "public", catalog = "FlotraDatabase")
+@Table(name = "repair", schema = "public")
 public class RepairEntity {
 
   private int repairId;

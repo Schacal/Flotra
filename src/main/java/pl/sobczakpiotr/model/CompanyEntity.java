@@ -14,7 +14,7 @@ import pl.sobczakpiotr.model.user.UserEntity;
  * @author Piotr Sobczak, created on 07-04-2018
  */
 @Entity
-@Table(name = "company", schema = "public", catalog = "FlotraDatabase")
+@Table(name = "company", schema = "public")
 public class CompanyEntity {
 
   private int companyId;

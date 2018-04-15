@@ -14,7 +14,7 @@ import pl.sobczakpiotr.model.car.CarEntity;
  * @author Piotr Sobczak, created on 07-04-2018
  */
 @Entity
-@Table(name = "holder", schema = "public", catalog = "FlotraDatabase")
+@Table(name = "holder", schema = "public")
 public class HolderEntity {
 
   private long peselNumber;

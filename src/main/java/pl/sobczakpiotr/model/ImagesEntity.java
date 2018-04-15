@@ -16,7 +16,7 @@ import pl.sobczakpiotr.model.carDetails.CardetailsEntity;
  * @author Piotr Sobczak, created on 07-04-2018
  */
 @Entity
-@Table(name = "images", schema = "public", catalog = "FlotraDatabase")
+@Table(name = "images", schema = "public")
 public class ImagesEntity {
 
   private int imageId;
