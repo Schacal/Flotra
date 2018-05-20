@@ -16,6 +16,7 @@ import static pl.sobczakpiotr.lang.Language.POLISH;
 
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.event.selection.SingleSelectionListener;
+import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.server.FileResource;
 import com.vaadin.server.Page;
@@ -36,6 +37,7 @@ import com.vaadin.ui.NativeSelect;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 import java.io.File;
@@ -116,6 +118,13 @@ public class LoginScreen extends CssLayout implements View {
     buttons.addComponent(login = new Button(bundle.getString(LOGIN_BUTTON_TEXT)));
     buttons.addComponent(new Label("&nbsp;&nbsp;&nbsp;", ContentMode.HTML));
     buttons.addComponent(registerButton = new Button(bundle.getString(REGISTER_BUTTON_TEXT)));
+    registerButton.addClickListener(new ClickListener() {
+      @Override
+      public void buttonClick(ClickEvent event) {
+        Navigator navigator = UI.getCurrent().getNavigator();
+        navigator.navigateTo(AppStringConstants.REGISTER_VIEW);
+      }
+    });
     registerButton.addStyleName(ValoTheme.BUTTON_PRIMARY);
     login.setDisableOnClick(true);
     login.addClickListener(new ClickListener() {

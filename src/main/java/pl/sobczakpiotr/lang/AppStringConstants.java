@@ -18,6 +18,7 @@ public final class AppStringConstants {
   public static final String LOGIN_FAILED_CAPTION = "login.failedCaption";
   public static final String LOGIN_FAILED_DESCRIPTION = "login.failedDescription";
   public static final String MAIN_VIEW = "main";
+  public static final String REGISTER_VIEW = "register";
   public static final String LOGIN_VIEW = "";
   public static final String LOGOUT_BUTTON = "logout.button";
   public static final String DASHBOARD = "dashboard.button";
@@ -33,5 +34,9 @@ public final class AppStringConstants {
   public static final String CAR_FUEL_TYPE = "car.fuel.type";
   public static final String CAr_LICENSE_PLATE = "car.license.plate";
   public static final String LOGO_FILE_NAME = "logo.file.name";
+  public static final String REGISTER_LABEL = "register.label";
+  public static final String USER_NAME = "user";
+  public static final String PASSWORD = "password";
+  public static final String E_MAIL = "email";
 
 }

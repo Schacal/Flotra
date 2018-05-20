@@ -47,6 +47,7 @@ public class AppUI extends UI {
       }
     }));
     navigator.addView(AppStringConstants.MAIN_VIEW, new MainView(carDao, userDao));
+    navigator.addView(AppStringConstants.REGISTER_VIEW, new RegisterView(userDao));
   }
 
   protected void showMainView() {
