@@ -90,6 +90,7 @@ public class MainView extends AbsoluteLayout implements View {
     System.out.println("userName = " + userName);
 
     setResponsive(true);
+    this.addStyleName("backgroundimage");
     Button logInOut = new Button(bundle.getString(LOGOUT_BUTTON),
         (ClickListener) e -> {
           CurrentUser.set(null);
@@ -108,7 +109,7 @@ public class MainView extends AbsoluteLayout implements View {
     String currentUSer = CurrentUser.get();
     addComponent(new Label(currentUSer), "top: 15%; left:1%");
     grid.setWidth(99, Unit.PERCENTAGE);
-    grid.setHeight(90, Unit.PERCENTAGE);
+
   }
 
   private Grid<CarEntity> preapreGridForCars(String user) {

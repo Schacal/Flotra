@@ -62,11 +62,14 @@ public class RegisterView extends AbsoluteLayout implements View {
     FileResource resource = new FileResource(new File(basepath +
         "/images/" + bundle.getString(LOGO_FILE_NAME)));
     Image image = new Image("", resource);
-
+    this.setSizeFull();
+    this.addStyleName("backgroundimage");
 //    addComponent(logInOut, "top: 1%; left:1%");
+    image.setWidth(600.0f, Unit.PIXELS);
+    image.setHeight(300.0f, Unit.PIXELS);
+
     addComponent(languageNativeSelect, "top: 1%; right: 1%");
-    addComponent(image, "top: 10%; right: 40%");
-//    image.setWidth(30.0f, Unit.PERCENTAGE);
+    addComponent(image, "top: 10%; right: 34%");
 
     buildRegisterForm();
   }
@@ -78,11 +81,14 @@ public class RegisterView extends AbsoluteLayout implements View {
     PasswordField passwordField = new PasswordField();
     Button registerButton = new Button(bundle.getString(REGISTER_BUTTON_TEXT));
     registerButton.addStyleName(ValoTheme.BUTTON_FRIENDLY);
-    addComponent(new Label(bundle.getString(REGISTER_LABEL)), "top: 35%; right: 45%");
-    addComponent(new Label(bundle.getString(USER_NAME)), "top: 40%; right: 55%");
-    addComponent(userNameField, "top: 40%; right: 45%");
-    addComponent(new Label(bundle.getString(PASSWORD)), "top: 50%; right: 55%");
-    addComponent(passwordField, "top: 50%; right: 45%");
+    registerButton.setWidth(150.0f, Unit.PIXELS);
+    Label registerText = new Label(bundle.getString(REGISTER_LABEL));
+    registerText.addStyleName(ValoTheme.LABEL_H2);
+    addComponent(registerText, "top: 35%; right: 40%");
+    addComponent(new Label(bundle.getString(USER_NAME)), "top: 50%; right: 55%");
+    addComponent(userNameField, "top: 50%; right: 45%");
+    addComponent(new Label(bundle.getString(PASSWORD)), "top: 55%; right: 55%");
+    addComponent(passwordField, "top: 55%; right: 45%");
     addComponent(new Label(bundle.getString(E_MAIL)), "top: 60%; right: 55%");
     addComponent(emailField, "top: 60%; right: 45%");
 
@@ -105,7 +111,7 @@ public class RegisterView extends AbsoluteLayout implements View {
       }
     });
 
-    addComponent(registerButton, "top: 70%; right: 50%");
+    addComponent(registerButton, "top: 75%; right: 45%");
   }
 
   private NativeSelect<Language> getLanguageNativeSelect() {

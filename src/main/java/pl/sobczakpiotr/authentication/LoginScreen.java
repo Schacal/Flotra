@@ -72,6 +72,7 @@ public class LoginScreen extends CssLayout implements View {
 
   private void buildUI() {
     addStyleName("login-screen");
+    this.addStyleName("backgroundimage");
 
     Component loginForm = buildLoginForm();
     NativeSelect<Language> languageSelector = getLanguageNativeSelect();
