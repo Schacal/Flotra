@@ -35,8 +35,10 @@ public final class AppStringConstants {
   public static final String CAr_LICENSE_PLATE = "car.license.plate";
   public static final String LOGO_FILE_NAME = "logo.file.name";
   public static final String REGISTER_LABEL = "register.label";
+  public static final String LOGGED_USER_LABEL = "loggedUser.label";
   public static final String USER_NAME = "user";
   public static final String PASSWORD = "password";
   public static final String E_MAIL = "email";
+  public static final String ADD_CAR_BUTTON_TEXT = "addCar.button.text";
 
 }
