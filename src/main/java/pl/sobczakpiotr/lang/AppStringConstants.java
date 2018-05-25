@@ -40,5 +40,7 @@ public final class AppStringConstants {
   public static final String PASSWORD = "password";
   public static final String E_MAIL = "email";
   public static final String ADD_CAR_BUTTON_TEXT = "addCar.button.text";
+  public static final String MODIFY_CAR_BUTTON_TEXT = "modifyCar.button.text";
+  public static final String DELETE_CAR_BUTTON_TEXT = "deleteCar.button.text";
 
 }

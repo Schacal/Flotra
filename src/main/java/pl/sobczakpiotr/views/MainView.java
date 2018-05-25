@@ -9,12 +9,14 @@ import static pl.sobczakpiotr.lang.AppStringConstants.CAR_MILEAGE;
 import static pl.sobczakpiotr.lang.AppStringConstants.CAR_MODEL;
 import static pl.sobczakpiotr.lang.AppStringConstants.CAr_LICENSE_PLATE;
 import static pl.sobczakpiotr.lang.AppStringConstants.DASHBOARD;
+import static pl.sobczakpiotr.lang.AppStringConstants.DELETE_CAR_BUTTON_TEXT;
 import static pl.sobczakpiotr.lang.AppStringConstants.INSURANCE_END_DATE;
 import static pl.sobczakpiotr.lang.AppStringConstants.INSURANCE_START_DATE;
 import static pl.sobczakpiotr.lang.AppStringConstants.LOGGED_USER_LABEL;
 import static pl.sobczakpiotr.lang.AppStringConstants.LOGOUT_BUTTON;
 import static pl.sobczakpiotr.lang.AppStringConstants.LOGO_FILE_NAME;
 import static pl.sobczakpiotr.lang.AppStringConstants.MAIN_VIEW;
+import static pl.sobczakpiotr.lang.AppStringConstants.MODIFY_CAR_BUTTON_TEXT;
 import static pl.sobczakpiotr.lang.AppStringConstants.TECHNICAL_EXAMINATION_END_DATE;
 import static pl.sobczakpiotr.lang.Language.ENGLISH;
 import static pl.sobczakpiotr.lang.Language.POLISH;
@@ -113,23 +115,35 @@ public class MainView extends AbsoluteLayout implements View {
           UI.getCurrent().getNavigator().navigateTo("");
         });
     NativeSelect<Language> languageNativeSelect = getLanguageNativeSelect();
-
-    addComponent(logInOut, "top: 1%; left:87%");
+    languageNativeSelect.setWidth(100.0f, Unit.PIXELS);
+    logInOut.setWidth(130.0f, Unit.PIXELS);
+    logInOut.setStyleName(ValoTheme.BUTTON_PRIMARY);
+    addComponent(logInOut, "top: 1%; left:84%");
     addComponent(languageNativeSelect, "top: 1%; right: 1%");
 
     Button dashboardButton = new Button(bundle.getString(DASHBOARD));
+    dashboardButton.setWidth(170.0f, Unit.PIXELS);
     Button addCarButton = new Button(bundle.getString(ADD_CAR_BUTTON_TEXT));
+    addCarButton.setWidth(170.0f, Unit.PIXELS);
+    Button modifyCarButton = new Button(bundle.getString(MODIFY_CAR_BUTTON_TEXT));
+    modifyCarButton.setWidth(170.0f, Unit.PIXELS);
+    Button deleteCarButton = new Button(bundle.getString(DELETE_CAR_BUTTON_TEXT));
+    deleteCarButton.setWidth(170.0f, Unit.PIXELS);
     addCarButton.setStyleName(ValoTheme.BUTTON_FRIENDLY);
+    deleteCarButton.setStyleName(ValoTheme.BUTTON_DANGER);
+
     Grid<CarEntity> grid = preapreGridForCars(userName);
 
     addComponent(dashboardButton, "top: 15%; left:1%");
     addComponent(addCarButton, "top: 21%; left:1%");
-    addComponent(grid, "top: 15%; left:10%");
+    addComponent(modifyCarButton, "top: 27%; left:1%");
+    addComponent(deleteCarButton, "top: 33%; left:1%");
+    addComponent(grid, "top: 15%; left:12%");
     String currentUSer = CurrentUser.get();
     Label labelLoggedUser = new Label(bundle.getString(LOGGED_USER_LABEL) + currentUSer);
-    labelLoggedUser.setStyleName(ValoTheme.LABEL_BOLD);
-    addComponent(labelLoggedUser, "top: 5%; left:87%");
-    grid.setWidth(99, Unit.PERCENTAGE);
+    labelLoggedUser.setStyleName(ValoTheme.LABEL_H2);
+    addComponent(labelLoggedUser, "top: 5%; left:80%");
+    grid.setWidth(95, Unit.PERCENTAGE);
 
 
   }
