@@ -39,7 +39,7 @@ public class CarEntity {
 
   @Id
   @Column(name = "car_id", nullable = false)
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
   public int getCarId() {
     return carId;
   }
@@ -77,7 +77,7 @@ public class CarEntity {
     return Objects.hash(carId, licensePlateNumber);
   }
 
-  @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+  @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE,
       CascadeType.REFRESH})
   @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
   public UserEntity getUserByUserId() {

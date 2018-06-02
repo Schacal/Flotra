@@ -19,6 +19,8 @@ public final class AppStringConstants {
   public static final String LOGIN_FAILED_DESCRIPTION = "login.failedDescription";
   public static final String MAIN_VIEW = "main";
   public static final String REGISTER_VIEW = "register";
+  public static final String ADD_NEW_CAR_VIEW = "addNewCar";
+  public static final String MODIFY_CAR_VIEW = "modifyCar";
   public static final String LOGIN_VIEW = "";
   public static final String LOGOUT_BUTTON = "logout.button";
   public static final String DASHBOARD = "dashboard.button";
@@ -31,6 +33,9 @@ public final class AppStringConstants {
   public static final String CAR_ENGINE = "car.engine";
   public static final String CAR_ENGINE_POWER = "car.engine.power";
   public static final String CAR_MILEAGE = "car.mileage";
+  public static final String CAR_COLOR = "car.color";
+  public static final String CAR_DOORS_NUMBER = "car.doors.number";
+  public static final String CAR_ADDITIONAL_EQUIPMENT = "car.additional.equipment";
   public static final String CAR_FUEL_TYPE = "car.fuel.type";
   public static final String CAr_LICENSE_PLATE = "car.license.plate";
   public static final String LOGO_FILE_NAME = "logo.file.name";
@@ -42,5 +47,9 @@ public final class AppStringConstants {
   public static final String ADD_CAR_BUTTON_TEXT = "addCar.button.text";
   public static final String MODIFY_CAR_BUTTON_TEXT = "modifyCar.button.text";
   public static final String DELETE_CAR_BUTTON_TEXT = "deleteCar.button.text";
+  public static final String ADD_NEW_CAR_LABEL = "addCar.label";
+  public static final String MODIFY_CAR_LABEL = "modifyCar.label";
+  public static final String ADD_CAR_BRAND_LABEL = "addCar.brand.label";
+  public static final String ADD_CAR_LICENCE_PLATE_LABEL = "addCar.licencePlate.label";
 
 }

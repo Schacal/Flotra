@@ -14,6 +14,7 @@ import pl.sobczakpiotr.authentication.LoginScreen;
 import pl.sobczakpiotr.authentication.LoginScreen.LoginListener;
 import pl.sobczakpiotr.lang.AppStringConstants;
 import pl.sobczakpiotr.model.car.CarDaoImpl;
+import pl.sobczakpiotr.model.image.ImagesDaoImpl;
 import pl.sobczakpiotr.model.user.UserDaoImpl;
 
 /**
@@ -34,6 +35,9 @@ public class AppUI extends UI {
   @Autowired
   private UserDaoImpl userDao;
 
+  @Autowired
+  private ImagesDaoImpl imagesDao;
+
 
   @Override
   protected void init(VaadinRequest request) {
@@ -46,8 +50,10 @@ public class AppUI extends UI {
         showMainView();
       }
     }));
-    navigator.addView(AppStringConstants.MAIN_VIEW, new MainView(carDao, userDao));
+    navigator.addView(AppStringConstants.MAIN_VIEW, new MainView(carDao, userDao, imagesDao));
     navigator.addView(AppStringConstants.REGISTER_VIEW, new RegisterView(userDao));
+    navigator.addView(AppStringConstants.ADD_NEW_CAR_VIEW, new NewCarView(carDao, userDao));
+    navigator.addView(AppStringConstants.MODIFY_CAR_VIEW, new ModifyCarView(carDao, userDao));
   }
 
   protected void showMainView() {

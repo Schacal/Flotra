@@ -1,6 +1,7 @@
 package pl.sobczakpiotr.model.car;
 
 import java.util.List;
+import java.util.Optional;
 import pl.sobczakpiotr.model.user.UserEntity;
 
 /**
@@ -15,4 +16,6 @@ public interface CarDao {
   void deleteCar(CarEntity carEntity);
 
   void updateCar(CarEntity carEntity);
+
+  Optional<CarEntity> findCar(int carId);
 }

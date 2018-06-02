@@ -1,6 +1,7 @@
 package pl.sobczakpiotr.model.car;
 
 import java.util.List;
+import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -42,5 +43,16 @@ public class CarDaoImpl implements CarDao {
   @Override
   public void updateCar(CarEntity carEntity) {
     entityManager.merge(carEntity);
+  }
+
+  @Override
+  public Optional<CarEntity> findCar(int carId) {
+    CarEntity carEntity = entityManager
+        .createQuery("SELECT t FROM CarEntity t where t.carId = :value1", CarEntity.class)
+        .setParameter("value1", carId).getSingleResult();
+    if (carEntity != null) {
+      return Optional.of(carEntity);
+    }
+    return Optional.empty();
   }
 }

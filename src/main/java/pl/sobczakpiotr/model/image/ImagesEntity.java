@@ -1,4 +1,4 @@
-package pl.sobczakpiotr.model;
+package pl.sobczakpiotr.model.image;
 
 import java.sql.Time;
 import java.util.Arrays;

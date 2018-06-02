@@ -34,7 +34,7 @@ public class CardetailsEntity {
 
   @Id
   @Column(name = "car_detail_id", nullable = false)
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
   public int getCarDetailId() {
     return carDetailId;
   }
